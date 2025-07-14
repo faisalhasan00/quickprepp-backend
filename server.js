@@ -33,22 +33,25 @@ const app = express();
 app.use(helmet());
 
 const allowedOrigins = [
+  process.env.CLIENT_URL,
   'http://localhost:5173',
   'https://quickprepp-frontend.vercel.app',
+  'https://quickprepp.netlify.app',
+  'https://*.netlify.app' // wildcard for preview deployments
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.netlify.app')) {
+      callback(null, true);
     } else {
-      return callback(new Error(`CORS error: ${origin} not allowed`), false);
+      console.error('CORS error:', origin, 'not allowed');
+      callback(new Error('CORS error: ' + origin + ' not allowed'));
     }
   },
   credentials: true,
 }));
+
 
 
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
