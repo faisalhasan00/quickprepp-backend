@@ -37,7 +37,8 @@ const allowedOrigins = [
   'http://localhost:5173',
   'https://quickprepp-frontend.vercel.app',
   'https://quickprepp.netlify.app',
-  'https://*.netlify.app' // wildcard for preview deployments
+  'https://quickprepp.in',
+  'https://*.netlify.app'
 ];
 
 app.use(cors({
@@ -51,6 +52,7 @@ app.use(cors({
   },
   credentials: true,
 }));
+
 
 
 
