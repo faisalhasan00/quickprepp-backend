@@ -29,6 +29,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.1",
     "morgan": "^1.10.0",
+    "multer": "^2.0.1",
     "nodemailer": "^7.0.4",
     "openai": "^5.8.2",
     "pino": "^9.7.0",
